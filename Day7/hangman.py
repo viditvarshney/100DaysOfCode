@@ -1,72 +1,22 @@
 import random
-stages = ['''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
-random_list = ['yellow', 'red', 'blue',
-               'black', 'grey', 'orange', 'violet', 'cyan']
+import stages
+import words
 
-chosen_word = random.choice(random_list)
+
+chosen_word = random.choice(words.random_word_list)
+print(stages.logo)
 
 #  Displaying the blanks for the chossen word
 lives_left = 6
 display = ['_'] * len(chosen_word)
+
 print(*display, end='\n \n')
 
 while('_' in display):
     guess = input("Make a guess: ").lower()
+
+    if guess in display:
+        print(f"You already guessed {guess}")
 
     # if guessed letter is in the choosen word, then display it in 'display'
 
@@ -75,8 +25,10 @@ while('_' in display):
             display[i] = guess
 
     if guess not in chosen_word:
+        print(
+            f"\nYour guessed letter: {guess} is not in the chosen word. You lost one life.")
         lives_left -= 1
-        print(stages[lives_left])
+        print(stages.stages[lives_left])
         if lives_left == 0:
 
             break
