@@ -1,5 +1,7 @@
 import string
+import logo
 
+print(logo.logo)
 alphabets = string.ascii_lowercase
 
 
@@ -18,10 +20,18 @@ def caesar(initial_text, key, cipher_direction):
     print(f"The {direction}d tesxt is: {result}")
 
 
-text = input("Type your message:\n").lower()
-key = int(input("Type the key number (this should be private): \n"))
-direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
-if direction.casefold() == 'encode' or direction.casefold() == 'decode':
+while True:
+    while True:
+
+        text = input("Type your message:\n").lower()
+        key = int(input("Type the key number (this should be private): \n"))
+        direction = input(
+            "Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+        if direction.casefold() == 'encode' or direction.casefold() == 'decode':
+            break
+        else:
+            print("Invalid option selected.")
     caesar(initial_text=text, key=key, cipher_direction=direction)
-else:
-    print("Invalid option selected.")
+    if(input("Want to do more Encryption or Decryption: yes OR no: ").casefold() == 'no'):
+        print("Happy Encryption.")
+        break
