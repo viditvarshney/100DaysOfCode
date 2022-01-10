@@ -3,7 +3,6 @@ import logo
 
 # Cards Numbers
 # Ace is 11, J,K,Q (each value is 10)
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 
 def Score(cards):
@@ -47,6 +46,7 @@ def compare(user_score, dealer_score):
         return "You Win..."
     else:
         return "You lose..."
+
 # random two caards for user and dealer
 
 
@@ -65,7 +65,7 @@ while True:
 
         user_Score = Score(player)
         dealer_Score = Score(dealer)
-        game_over = False
+        # game_over = False
 
         print(f"Your cards: {player}, and score: {user_Score}\n")
         print(f"dealer cards: {dealer[0]}\n")
@@ -80,13 +80,15 @@ while True:
             else:
 
                 game_over = True
+        # Now Dealer will play, If his score is les than 17 and doesn't have a Blackjack(0)
+        # Its keep drawing a new card.
 
-        while dealer_Score > 0 and dealer_Score < 17:
+        while dealer_Score != 0 and dealer_Score < 17:
             dealer.append(rand_generator())
             dealer_Score = Score(dealer)
-    print(f"   Your final hand: {player}, final score: {user_Score}\n")
+    print(f"   Your final hand: {player}, Final Score: {user_Score}\n")
     print(
-        f"   Computer's final hand: {dealer}, final score: {dealer_Score}\n")
+        f"   Dealer's final hand: {dealer}, Final Score: {dealer_Score}\n")
 
     print("*******************************************\n")
     print(f"\t{compare(user_Score, dealer_Score)}\n")
