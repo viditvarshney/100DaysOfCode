@@ -1,5 +1,5 @@
 import random
-from typing import Generator
+import logo
 
 # Cards Numbers
 # Ace is 11, J,K,Q (each value is 10)
@@ -50,39 +50,48 @@ def compare(user_score, dealer_score):
 # random two caards for user and dealer
 
 
-player = []
-dealer = []
+while True:
+    print(logo.logo)
+    player = []
+    dealer = []
 
-game_over = False
-
-for _ in range(2):
-    player.append(rand_generator())
-    dealer.append(rand_generator())
-
-while not game_over:
-
-    user_Score = Score(player)
-    dealer_Score = Score(dealer)
     game_over = False
 
-    print(f"Your cards: {player}, and score: {user_Score}")
-    print(f"dealer cards: {dealer[0]}")
-
-    if user_Score == 0 or dealer_Score == 0 or sum(player) > 21:
-        game_over = True
-    else:
-        if input("You want a HIT? 'y' or 'n' for stand: ").casefold() == 'y':
-            player.append(rand_generator())
-            # print(player)
-
-        else:
-
-            game_over = True
-
-    while dealer_Score > 0 and dealer_Score < 17:
+    for _ in range(2):
+        player.append(rand_generator())
         dealer.append(rand_generator())
+
+    while not game_over:
+
+        user_Score = Score(player)
         dealer_Score = Score(dealer)
-print(f"   Your final hand: {player}, final score: {user_Score}")
-print(
-    f"   Computer's final hand: {dealer}, final score: {dealer_Score}")
-print(compare(user_Score, dealer_Score))
+        game_over = False
+
+        print(f"Your cards: {player}, and score: {user_Score}\n")
+        print(f"dealer cards: {dealer[0]}\n")
+
+        if user_Score == 0 or dealer_Score == 0 or sum(player) > 21:
+            game_over = True
+        else:
+            if input("You want a HIT? 'y' or 'n' for stand: ").casefold() == 'y':
+                player.append(rand_generator())
+                # print(player)
+
+            else:
+
+                game_over = True
+
+        while dealer_Score > 0 and dealer_Score < 17:
+            dealer.append(rand_generator())
+            dealer_Score = Score(dealer)
+    print(f"   Your final hand: {player}, final score: {user_Score}\n")
+    print(
+        f"   Computer's final hand: {dealer}, final score: {dealer_Score}\n")
+
+    print("*******************************************\n")
+    print(f"\t{compare(user_Score, dealer_Score)}\n")
+    print("*******************************************")
+
+    if(input("Want to play again? 'y' or 'n': ").casefold() == 'n'):
+        print("Ok, Bye..... Game Ended!!!")
+        break
