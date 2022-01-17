@@ -1,3 +1,5 @@
+from ast import IsNot
+import time
 
 MENU = {
     "espresso": {
@@ -5,7 +7,7 @@ MENU = {
             "water": 50,
             "coffee": 18,
         },
-        "cost": 1.5,
+        "cost": 150.75,
     },
     "latte": {
         "ingredients": {
@@ -13,7 +15,7 @@ MENU = {
             "milk": 150,
             "coffee": 24,
         },
-        "cost": 2.5,
+        "cost": 175.85,
     },
     "cappuccino": {
         "ingredients": {
@@ -21,7 +23,7 @@ MENU = {
             "milk": 100,
             "coffee": 24,
         },
-        "cost": 3.0,
+        "cost": 300.75,
     }
 }
 
@@ -29,89 +31,111 @@ resources = {
     "water": 300,
     "milk": 200,
     "coffee": 100,
-    "money": 0.0
 }
 
-# Process the Coin
-quater = 0.25
-dimes = 0.1
-nickles = 0.05
-pennies = 0.01
+
+# def UpdateResources(choosen_drink, Resource):
+#     ref = {
+#         "espresso": {
+#             "water": 50,
+#             "milk": 0,
+#             "coffee": 18,
+#             "money": 1.5
+#         },
+#         "latte": {
+#             "water": 200,
+#             "milk": 150,
+#             "coffee": 24,
+#             "money": 2.5
+#         },
+#         "cappucinno": {
+#             "water": 250,
+#             "milk": 100,
+#             "coffee": 24,
+#             "money": 3.0
+#         },
+#     }
+
+#     Resource["water"] -= ref[choosen_drink]["water"]
+#     Resource["milk"] -= ref[choosen_drink]["milk"]
+#     Resource['coffee'] -= ref[choosen_drink]["coffee"]
+#     Resource['money'] += ref[choosen_drink]["money"]
 
 
-drink_u_wnt = input(
-    "Want do you want to have? : (Espresso / Latte / Cappuccino: ").lower()
-
-
-#  update resources
-
-
-def UpdateResources(choosen_drink, Resource):
-    ref = {
-        "espresso": {
-            "water": 50,
-            "milk": 0,
-            "coffee": 18,
-            "money": 1.5
-        },
-        "latte": {
-            "water": 200,
-            "milk": 150,
-            "coffee": 24,
-            "money": 2.5
-        },
-        "cappucinno": {
-            "water": 250,
-            "milk": 100,
-            "coffee": 24,
-            "money": 3.0
-        },
-    }
-
-    Resource["water"] -= ref[choosen_drink]["water"]
-    Resource["milk"] -= ref[choosen_drink]["milk"]
-    Resource['coffee'] -= ref[choosen_drink]["coffee"]
-    Resource['money'] += ref[choosen_drink]["money"]
+profit = 0
 
 
 # Is the amount received is suuficient for the choosen drink
 
+def transaction_success(tot_amount, drink_cost):
+    """Returns TRUE if the transaction is successful otherwise False."""
+    # print(drink_cost)  # for testing
 
-def transaction(tot_amount, Menu, choosen_drink, resource):
-    print("choosen drink cost: ", Menu[choosen_drink]['cost'])  # for testing
-    if (tot_amount < Menu[choosen_drink]['cost']):
+    change = round(tot_amount - drink_cost, 2)
+    if (tot_amount < drink_cost):
         print(
             f"Amount paid is less. Money Refunded...: {round(tot_amount,2)}")
-
-    elif(tot_amount > Menu[choosen_drink]['cost']):
-        print(
-            f"Here is your change: {round(tot_amount - Menu[choosen_drink]['cost'], 2)}.\n")
-        print(
-            f"Your transaction is successful, Your {choosen_drink} is on the way. ")
-        UpdateResources(choosen_drink, resource)
+        return False
 
     else:
-        print(
-            f"Your transaction is successful, Your {choosen_drink} is on the way. ")
+        if(tot_amount > drink_cost):
+            print(
+                f"Here is your change: {change}.\n")
+            global profit
+            profit += drink_cost
+        print("Your Transaction is successful.\n")
+        return True
 
 
-if drink_u_wnt == 'off':
+def making_coffee(drink_name, drink_ingredients):
+    """Update the Resources inventory."""
+    # print(drink_ingredients)  # Testing
+    for item in drink_ingredients:
+        resources[item] -= drink_ingredients[item]
+    print("Machine took the Ingredients...")
+    time.sleep(2)
+    print(
+        f"Your {drink_name} is on the way. ")
+    time.sleep(2)
+    print("Take your Drink, ENJOY!\n")
+    time.sleep(2)
+    print("Next Customer.\n")
+    time.sleep(2)
 
-    print("Coffee Machine is switched off.")
 
-elif drink_u_wnt == 'report':
-    print(resources)
+is_on = True
+drink_available = ['espresso', 'latte', 'cappuccino', 'off', 'report']
 
+while is_on:
 
-else:
+    drink_u_wnt = input(
+        "Want do you want to have? : (Espresso / Latte / Cappuccino: ").lower()
+    if drink_u_wnt in drink_available:
 
-    print("Enter the amount\n")
-    in_quater = float(input("Quaters: "))
-    in_dimes = float(input("Dimes: "))
-    in_nickles = float(input("Nickles: "))
-    in_pennies = float(input("Pennies: "))
-    total_amount_received = (in_quater*quater) + (in_dimes * dimes) + \
-        (in_nickles*nickles) + (in_pennies*pennies)
-    print(f"Total amount received: {total_amount_received}")
+        if drink_u_wnt == 'off':
 
-    transaction(total_amount_received, MENU, drink_u_wnt, resources)
+            print("Coffee Machine is switched off.")
+            is_on = False
+
+        elif drink_u_wnt == 'report':
+            print(f"Water: {resources['water']} ml")
+            print(f"Milk: {resources['milk']} ml")
+            print(f"Coffee: {resources['coffee']} g")
+            print(f"Money: ₹ {profit}")
+
+        else:
+            print("Insert the amount\n")
+            total_amount_received = int(input("How much Rupees: "))
+            total_amount_received += int(input("How much Paisa: "))/100
+
+            print(f"Total amount received: {total_amount_received}")
+            print("Validating Your Transaction...\n")
+            time.sleep(3)
+
+            drink = MENU[drink_u_wnt]
+
+            if transaction_success(total_amount_received, drink["cost"]):
+                making_coffee(drink_u_wnt, drink["ingredients"])
+    else:
+        print("\n")
+        print("Invalid Drink Name Entered.\n")
