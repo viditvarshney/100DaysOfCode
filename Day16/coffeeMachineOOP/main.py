@@ -1,8 +1,8 @@
-from typing import Type
+import time
 from money_machine import MoneyMachine
 from menu import Menu
 from coffee_maker import CoffeeMaker
-import time
+
 
 coffee_maker = CoffeeMaker()
 money_machine = MoneyMachine()
