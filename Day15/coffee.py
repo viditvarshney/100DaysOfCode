@@ -1,4 +1,3 @@
-from ast import IsNot
 import time
 
 MENU = {
