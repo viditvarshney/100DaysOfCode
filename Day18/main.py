@@ -1,7 +1,6 @@
 from random import choice, randint
 import turtle as t
 
-from numpy import angle
 
 tim = t.Turtle()
 t.screensize(10, 10)
