@@ -7,7 +7,7 @@ import random
 my_screen = t.Screen()
 
 # canvas height and weight
-my_screen.setup(width=500, height=400)
+my_screen.setup(width=500, height=500)
 
 # CApturing the user input in a variable
 user_bet = my_screen.textinput(
@@ -35,8 +35,10 @@ for i in range(6):
 
 
 def random_steps():
-    return random.randint(15, 40)
+    return random.randint(1, 20)
 
+
+# Game
 
 is_race = False
 
@@ -54,8 +56,8 @@ while is_race:
             else:
                 print(f"You Lost!, The {winner_color} turtle is the Winner.")
 
-        random_distance = random.randint(0, 10)
-        turtle.forward(random_distance)
+        # random_distance = random.randint(0, 10)
+        turtle.forward(random_steps())
 
 
 my_screen.exitonclick()
