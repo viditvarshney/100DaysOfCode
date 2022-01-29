@@ -25,7 +25,7 @@ def clear():
     tim.clear()
     tim.penup()
     tim.home()
-    tim.pd()
+    tim.pd()  # pendown
 
 
 my_screen.onkey(key="w", fun=move_fw)
