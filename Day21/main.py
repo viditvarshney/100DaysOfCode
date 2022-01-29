@@ -45,5 +45,13 @@ while is_snake_moving:
         scoreboard.game_over()
         is_snake_moving = False
 
+    #  Detech Tail Collison: When head collides with any segment of snake
+
+    for any_segment in snaky.snake_segments[1:]:
+
+        if snaky.head.distance(any_segment) < 9:
+            scoreboard.game_over()
+            is_snake_moving = False
+
 
 my_screen.exitonclick()
