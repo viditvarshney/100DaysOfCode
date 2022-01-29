@@ -2,10 +2,15 @@ import time
 import turtle as t
 from snake import Snake
 from food import Food
+from score import Score
 
 
 my_screen = t.Screen()
-my_screen.bgcolor("blue")
+# Score Board
+
+scoreboard = Score()
+
+my_screen.bgcolor('black')
 my_screen.setup(height=600, width=600)
 
 my_screen.tracer(0)
@@ -29,7 +34,8 @@ while is_snake_moving:
     # Detec Collison of Snake With Food
 
     if snaky.head.distance(food) < 15:
-        print("collison")
+
+        scoreboard.update_score()
         food.reset_food()
 
 

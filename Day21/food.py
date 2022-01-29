@@ -17,6 +17,6 @@ class Food(Turtle):
         self.color(random.choice(colors))
         self.shapesize(stretch_len=0.65, stretch_wid=0.65)
         random_x = random.randint(-280, 280)
-        random_y = random.randint(-280, 280)
+        random_y = random.randint(-280, 250)
         self.pu()
         self.goto(random_x, random_y)
