@@ -37,6 +37,13 @@ while is_snake_moving:
 
         scoreboard.update_score()
         food.reset_food()
+        snaky.snake_extention()
+
+    # Detect Collison with Walls
+
+    if snaky.head.xcor() > 290 or snaky.head.xcor() < -290 or snaky.head.ycor() > 290 or snaky.head.ycor() < -290:
+        scoreboard.game_over()
+        is_snake_moving = False
 
 
 my_screen.exitonclick()

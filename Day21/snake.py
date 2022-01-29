@@ -3,6 +3,7 @@ import time
 
 my_screen = t.Screen()
 
+
 X_POS = [0, -20, -40]
 MOVE_DISTANCE = 20
 
@@ -20,6 +21,16 @@ class Snake:
             snake_body.penup()
             snake_body.setx(x)
             self.snake_segments.append(snake_body)
+
+    def snake_extention(self):
+        extention_seg = t.Turtle("circle")
+        # extention_seg.hideturtle()
+
+        extention_seg.pu()
+
+        self.snake_segments.append(extention_seg)
+        extention_seg.color("white")
+        # extention_seg.showturtle()
 
     def move(self):
 
