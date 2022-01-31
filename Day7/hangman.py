@@ -36,5 +36,7 @@ while('_' in display):
     print(*display, end='\n \n')
 if '_' not in display:
     print("You Won")
+    print(f"You gueesed it Right, The correct word was {chosen_word} ")
 else:
     print("You Loose :-( ")
+    print(f"The correct word was {chosen_word} ")
