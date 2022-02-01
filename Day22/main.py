@@ -1,5 +1,5 @@
 #  PONG GAME
-
+import time
 import turtle as t
 from score import Score
 from paddle import Paddle
@@ -9,7 +9,7 @@ myscreen = t.Screen()
 myscreen.setup(width=800, height=600)
 myscreen.bgcolor("black")
 myscreen.title("PONG GAME")
-# myscreen.tracer(0)
+myscreen.tracer(0)
 
 scoreboard = Score()
 
@@ -29,9 +29,9 @@ myscreen.onkey(paddle_l.move_down, "s")
 is_game_on = True
 while is_game_on:
     # myscreen.update()
-    ball.speed(1)
+    time.sleep(0.1)
     ball.ball_move()
-
+    myscreen.update()
     # Detect collision with  walls (walls on y -axis)
 
     if ball.ycor() > 285 or ball.ycor() < -285:
@@ -40,8 +40,19 @@ while is_game_on:
 
     # Detect colllision of ball with paddle
     if (ball.distance(paddle_r) < 50 and ball.xcor() > 350) or (ball.distance(paddle_l) < 50 and ball.xcor() < -350):
-        print("collided")
+        # print("collided")
         ball.bounce_x()
+
+    #  Detect when paddle misses ball
+
+    if ball.xcor() > 370:
+        ball.reset_ball_pos()
+
+        scoreboard.update_lscore()
+
+    elif ball.xcor() < -370:
+        ball.reset_ball_pos()
+        scoreboard.update_rscore()
 
 
 myscreen.exitonclick()
