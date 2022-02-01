@@ -32,5 +32,11 @@ while is_game_on:
     ball.speed(1)
     ball.ball_move()
 
+    # Detect collision with  walls (walls on y -axis)
+
+    if ball.ycor() > 285 or ball.ycor() < -285:
+
+        ball.bouce()
+
 
 myscreen.exitonclick()
