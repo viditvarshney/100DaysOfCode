@@ -20,16 +20,16 @@ ball = Ball()
 
 
 myscreen.listen()
-myscreen.onkey(paddle_r.move_up, "Up")
-myscreen.onkey(paddle_r.move_down, "Down")
-myscreen.onkey(paddle_l.move_up, "w")
-myscreen.onkey(paddle_l.move_down, "s")
+myscreen.onkeypress(paddle_r.move_up, "Up")
+myscreen.onkeypress(paddle_r.move_down, "Down")
+myscreen.onkeypress(paddle_l.move_up, "w")
+myscreen.onkeypress(paddle_l.move_down, "s")
 
 
 is_game_on = True
 while is_game_on:
     # myscreen.update()
-    time.sleep(0.1)
+    time.sleep(ball.ball_move_speed)
     ball.ball_move()
     myscreen.update()
     # Detect collision with  walls (walls on y -axis)
