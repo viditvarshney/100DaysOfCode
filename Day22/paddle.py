@@ -1,4 +1,4 @@
-from turtle import Turtle, xcor, ycor
+from turtle import Turtle
 
 
 class Paddle(Turtle):
