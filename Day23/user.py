@@ -15,3 +15,6 @@ class UserCar(Turtle):
     def move(self):
         new_y = self.ycor() + 20
         self.sety(new_y)
+
+    def timmy_reset(self):
+        self.goto(TURTLE_START_POSITION)

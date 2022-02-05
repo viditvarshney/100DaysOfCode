@@ -9,13 +9,15 @@ myscreen.tracer(0)
 
 timmy = UserCar()
 myscreen.listen()
-myscreen.onkey(timmy.move(), "Up")
-
+myscreen.onkey(timmy.move, "Up")
 
 is_game_on = True
 
 while is_game_on:
     time.sleep(0.1)
+    if timmy.ycor() > 280:
+        timmy.timmy_reset()
+
     myscreen.update()
 
 
