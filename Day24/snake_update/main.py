@@ -47,7 +47,7 @@ while is_snake_moving:
         scoreboard.score = 0
         snaky.reset_snake()
         scoreboard.restarting_game()
-        time.sleep(1)
+        scoreboard.write_highscore()
 
     #  Detech Tail Collison: When head collides with any segment of snake
 
@@ -60,6 +60,7 @@ while is_snake_moving:
             scoreboard.restarting_game()
 
             snaky.reset_snake()
+            scoreboard.write_highscore()
 
 
 my_screen.exitonclick()
