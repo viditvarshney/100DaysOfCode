@@ -2,40 +2,33 @@
 from turtle import Turtle
 import random
 
-MOVE_DISTANCE = 15
+MOVE_DISTANCE = 5
 COLORS = ['gray', 'deep pink', 'gold', 'blue violet', 'lime', 'dark blue']
 
 
-class Car(Turtle):
+class Car:
     def __init__(self):
-        super().__init__()
         self.car_models = []
-        self.createCars()
 
-    def createCars(self):
-        for _ in range(10):
-            next_car = Turtle()
-
+    def createCar(self):
+        # To reduce the car frequency
+        random_choice = random.randint(1, 6)
+        if random_choice == 1:
+            next_car = Turtle("square")
+            next_car.shapesize(stretch_wid=1, stretch_len=2)
             next_car.pu()
-            next_car.left(180)
-            next_car.shape("square")
-            next_car.shapesize(stretch_len=1.3, stretch_wid=1)
             next_car.color(random.choice(COLORS))
 
-            next_car.goto(310, self.random_car_start_pos())
+            next_car.goto(310, self.random_y())
             self.car_models.append(next_car)
+            # print(self.car_models)
+            # self.move_car()  It can't be here because after appending one car to the 'car_models' it will stuck in the
+            # for loop of 'move_car()' function.
+            # self.move_car()
 
-        print(self.car_models)
-
-    def random_move_steps(self):
-        return random.randint(0, 10)
-
-    def random_car_start_pos(self):
+    def random_y(self):
         return random.randint(-250, 250)
 
     def move_car(self):
-        self.speed(1)
         for car in self.car_models:
-            if car.xcor() < -310:
-                car.goto(310, self.random_car_start_pos())
-            car.forward(self.random_move_steps())
+            car.backward(MOVE_DISTANCE)

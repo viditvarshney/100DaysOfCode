@@ -15,7 +15,7 @@ myscreen.listen()
 myscreen.onkey(timmy.move, "Up")
 
 # Cars on the road
-car = Car()
+car_manager = Car()
 
 # Scoreboard
 scoreboard = Score()
@@ -25,13 +25,21 @@ is_game_on = True
 
 while is_game_on:
     time.sleep(0.1)
+    myscreen.update()
     if timmy.ycor() > 280:
         scoreboard.update_score()
         timmy.timmy_reset()
 
     # Car moving from left --> right
-    car.move_car()
-    myscreen.update()
+
+    car_manager.createCar()
+    car_manager.move_car()
+
+    # detect collision of turtle with any car
+    for car in car_manager.car_models:
+
+        if timmy.distance(car) < 20:
+            is_game_on = False
 
 
 myscreen.exitonclick()
