@@ -2,13 +2,14 @@
 from turtle import Turtle
 import random
 
-MOVE_DISTANCE = 5
+
 COLORS = ['gray', 'deep pink', 'gold', 'blue violet', 'lime', 'dark blue']
 
 
 class Car:
     def __init__(self):
         self.car_models = []
+        self.move_distance = 5
 
     def createCar(self):
         # To reduce the car frequency
@@ -31,4 +32,4 @@ class Car:
 
     def move_car(self):
         for car in self.car_models:
-            car.backward(MOVE_DISTANCE)
+            car.backward(self.move_distance)

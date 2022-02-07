@@ -28,6 +28,7 @@ while is_game_on:
     myscreen.update()
     if timmy.ycor() > 280:
         scoreboard.update_score()
+        car_manager.move_distance += 0.1
         timmy.timmy_reset()
 
     # Car moving from left --> right
@@ -39,6 +40,7 @@ while is_game_on:
     for car in car_manager.car_models:
 
         if timmy.distance(car) < 20:
+            scoreboard.game_over()
             is_game_on = False
 
 
