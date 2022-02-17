@@ -27,15 +27,16 @@ attempts = 0
 #                  align="center", font=('Courier', 15, 'bold'))
 
 already_named = []  # list to track already named states
-while True:
 
-    # breaking loop when user give all 28 states name
-    if correct_states_sofar == 28:
-        break
+while correct_states_sofar < 28:
+
     # Take input from the user
 
     user_guess = my_screen.textinput(
         f"Score: {correct_states_sofar}/ 28 in {attempts} attempts", "Name the another state: ").title()
+
+    if user_guess == "Exit":
+        break
 
     # check if user_guess is already named
 
@@ -82,5 +83,11 @@ while True:
     scoreboard.write(f"Score: {correct_states_sofar}/28 in {attempts} attempts", False,
                      align="center", font=('Courier', 15, 'bold'))
 
+# Create a csv file when user exit the game: contain the remaining states
 
-my_screen.mainloop()  # It is the alternative to exitonClick()
+remaining_states = pd.DataFrame(
+    set(data.state) - set(already_named))
+remaining_states.to_csv("./learn.csv")
+
+
+# my_screen.mainloop()  # It is the alternative to exitonClick()
