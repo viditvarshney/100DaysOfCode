@@ -8,7 +8,14 @@ my_screen.title("NAME ALL THE STATE NAMES")
 
 my_screen.bgpic("./india_map.gif")
 
-# Track the number of states / 28 in the upper most space
+# scoreboard tracking
+scoreboard = t.Turtle()
+scoreboard.hideturtle()
+scoreboard.pu()
+scoreboard.goto(0, 300)
+scoreboard.pd()
+
+# Track the number of states / 28 in the upper most space -- Done
 
 
 data = pd.read_csv("./states_cor.csv")
@@ -16,6 +23,9 @@ data_list = data.values.tolist()
 states = data.state.tolist()
 correct_states_sofar = 0
 attempts = 0
+# scoreboard.write(f"Score: {correct_states_sofar}/28 in {attempts} attempts", False,
+#                  align="center", font=('Courier', 15, 'bold'))
+
 already_named = []  # list to track already named states
 while True:
 
@@ -68,6 +78,9 @@ while True:
             time.sleep(2)
             t.clear()
     attempts += 1
+    scoreboard.clear()
+    scoreboard.write(f"Score: {correct_states_sofar}/28 in {attempts} attempts", False,
+                     align="center", font=('Courier', 15, 'bold'))
 
 
 my_screen.mainloop()  # It is the alternative to exitonClick()
