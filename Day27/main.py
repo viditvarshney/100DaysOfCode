@@ -1,6 +1,5 @@
 # C to F Scale
 
-from distutils import command
 import tkinter as tk
 
 
