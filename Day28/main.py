@@ -2,8 +2,8 @@ import tkinter as tk
 
 ORANGE = '#F3C6C0'
 LONG_BREAK = 20
-SHORT_BREAK = 1
-WORK = 1
+SHORT_BREAK = 5
+WORK = 25
 
 repeat = 0
 timer = None
@@ -50,8 +50,8 @@ def start_countdown():
     global repeat
     repeat += 1
 
-    work_secs = WORK * 6
-    short_secs = SHORT_BREAK * 9
+    work_secs = WORK * 60
+    short_secs = SHORT_BREAK * 60
     long_secs = LONG_BREAK * 60
 
     if repeat % 2 == 0:
