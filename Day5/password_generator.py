@@ -18,5 +18,5 @@ for i in range(nr_symbols):
 
 for i in range(nr_symbols):
     password = password + random.choice(symbols)
-
+# random.sample return the list of some sample from the password string
 print(''.join(random.sample(password, len(password))))
