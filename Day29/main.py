@@ -66,6 +66,8 @@ def save():
                 website_input.delete(0, 'end')
                 pass_input.delete(0, 'end')
                 website_input.focus()
+        messagebox.showinfo(
+            title="Success", message=f"{web_text} is added to the DB.")
 
 
 with open("./data.txt", "a") as data_file:
